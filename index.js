@@ -26,6 +26,8 @@ const WORDS = [
     'press',
 ]
 
+let counter = 0
+
 app.get('/random-words', (req, res) => {
 
     const randomIndex = Math.floor(Math.random() * WORDS.length)
@@ -34,12 +36,24 @@ app.get('/random-words', (req, res) => {
         word: WORDS[randomIndex],
     }
 
-    if (randomIndex % 3 === 0) {
+    counter++
+    if (counter > 10 && counter % 2 === 0) {
         throw new Error("Internal server error")
     }
 
     res.send(guessWord);
 });
+
+app.get('/counter', (req, res) => {
+    res.send(counter);
+});
+
+
+app.get('/reset-counter', (req, res) => {
+    counter = 0
+    res.send("Counter successfully reset");
+});
+
 
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
