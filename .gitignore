@@ -1,0 +1,4 @@
+wordle/backend/node_modules
+wordle/exercise/node_modules
+wordle/solution/node_modules
+.idea/
